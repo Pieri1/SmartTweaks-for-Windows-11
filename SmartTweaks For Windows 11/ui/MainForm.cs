@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SmartTweaks_For_Windows_11
+namespace SmartTweaks_For_Windows_11.ui
 {
     public partial class MainForm : Form
     {
