@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -19,7 +20,7 @@ namespace SmartTweaks_For_Windows_11.ui
         public MainForm()
         {
             InitializeComponent();
-            AddAliasLabels();
+            SetUpForm();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -27,7 +28,7 @@ namespace SmartTweaks_For_Windows_11.ui
 
         }
 
-        private void AddAliasLabels()
+        private void SetUpForm()
         {
             var jsonReader = new JsonReader();
             // Maybe this path will be a problem when the application is installed on a different machine
@@ -40,28 +41,17 @@ namespace SmartTweaks_For_Windows_11.ui
             int yOffset = 30;
             foreach (var item in jsonArray)
             {
-                if (item.TryGetProperty("alias", out var alias))
+                if (item.TryGetProperty("name", out var name))
                 {
                     var label = new Label
                     {
-                        Text = alias.GetString(),
+                        Text = name.GetString(),
                         Location = new System.Drawing.Point(xOffset, yOffset),
                         AutoSize = true
                     };
                     this.Controls.Add(label);
                     xOffset += 100;
                 }
-                /*if (item.TryGetProperty("cat", out var cat))
-                {
-                    var label = new Label
-                    {
-                        Text = cat.GetString(),
-                        Location = new System.Drawing.Point(xOffset, yOffset),
-                        AutoSize = true
-                    };
-                    this.Controls.Add(label);
-                    xOffset += 100;
-                } */
                 if (item.TryGetProperty("desc", out var desc))
                 {
                     var label = new Label
@@ -73,42 +63,33 @@ namespace SmartTweaks_For_Windows_11.ui
                     this.Controls.Add(label);
                     xOffset += 500;
                 }
-                if (item.TryGetProperty("opts", out var opts))
+                if(item.TryGetProperty("alias", out var alias))
                 {
-                    var comboBox = new ComboBox
+                    if (item.TryGetProperty("opts", out var opts))
                     {
-                        Location = new System.Drawing.Point(xOffset, yOffset),
-                        Width = 200
-                    };
-
-                    foreach (var opt in opts.EnumerateArray())
-                    {
-                        if (opt.TryGetProperty("state", out var state))
+                        var comboBox = new ComboBox
                         {
-                            comboBox.Items.Add(state.GetString());
-                        }
-                    }
+                            Tag = alias.GetString(),
+                            Location = new System.Drawing.Point(xOffset, yOffset),
+                            Width = 200
+                        };
 
-                    this.Controls.Add(comboBox);
-                    xOffset += 210; // Adjust the offset for the next control
+                        foreach (var opt in opts.EnumerateArray())
+                        {
+                            if (opt.TryGetProperty("state", out var state))
+                            {
+                                comboBox.Items.Add(state.GetString());
+                            }
+                        }
+
+                        this.Controls.Add(comboBox);
+                        xOffset += 210;
+                    }
                 }
 
                 yOffset += 35;
                 xOffset = 30;
             }
-
-
-           /* foreach (var alias in aliases)
-            {
-                var label = new Label
-                {
-                    Text = alias,
-                    Location = new System.Drawing.Point(10, yOffset),
-                    AutoSize = true
-                };
-                this.Controls.Add(label);
-                yOffset += 25; // Adjust the offset for the next label
-            }*/
         }
     }
 }
