@@ -36,8 +36,8 @@ namespace SmartTweaks_For_Windows_11.ui
             var jsonBrute = jsonReader.GetJson(relativePath);
             var jsonArray = jsonBrute.RootElement.EnumerateArray();
 
-            int xOffset = 10;
-            int yOffset = 10;
+            int xOffset = 30;
+            int yOffset = 30;
             foreach (var item in jsonArray)
             {
                 if (item.TryGetProperty("alias", out var alias))
@@ -51,7 +51,7 @@ namespace SmartTweaks_For_Windows_11.ui
                     this.Controls.Add(label);
                     xOffset += 100;
                 }
-                if (item.TryGetProperty("cat", out var cat))
+                /*if (item.TryGetProperty("cat", out var cat))
                 {
                     var label = new Label
                     {
@@ -61,7 +61,7 @@ namespace SmartTweaks_For_Windows_11.ui
                     };
                     this.Controls.Add(label);
                     xOffset += 100;
-                }
+                } */
                 if (item.TryGetProperty("desc", out var desc))
                 {
                     var label = new Label
@@ -71,10 +71,30 @@ namespace SmartTweaks_For_Windows_11.ui
                         AutoSize = true
                     };
                     this.Controls.Add(label);
-                    xOffset += 100;
+                    xOffset += 500;
                 }
-                yOffset += 25;
-                xOffset = 10;
+                if (item.TryGetProperty("opts", out var opts))
+                {
+                    var comboBox = new ComboBox
+                    {
+                        Location = new System.Drawing.Point(xOffset, yOffset),
+                        Width = 200
+                    };
+
+                    foreach (var opt in opts.EnumerateArray())
+                    {
+                        if (opt.TryGetProperty("state", out var state))
+                        {
+                            comboBox.Items.Add(state.GetString());
+                        }
+                    }
+
+                    this.Controls.Add(comboBox);
+                    xOffset += 210; // Adjust the offset for the next control
+                }
+
+                yOffset += 35;
+                xOffset = 30;
             }
 
 
