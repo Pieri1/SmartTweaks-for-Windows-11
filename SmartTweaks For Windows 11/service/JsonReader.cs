@@ -7,29 +7,21 @@ namespace SmartTweaks_For_Windows_11.service
 {
     internal class JsonReader
     {
-        public List<string> GetAliasesFromJson(string filePath)
+        public JsonDocument GetJson(string filePath)
         {
-            var aliases = new List<string>();
+            JsonDocument jsonArray = null;
 
             try
             {
                 var json = File.ReadAllText(filePath);
-                var jsonArray = JsonDocument.Parse(json).RootElement.EnumerateArray();
-
-                foreach (var item in jsonArray)
-                {
-                    if (item.TryGetProperty("alias", out var alias))
-                    {
-                        aliases.Add(alias.GetString());
-                    }
-                }
+                jsonArray = JsonDocument.Parse(json);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading JSON: {ex.Message}");
             }
 
-            return aliases;
+            return jsonArray;
         }
     }
 }
