@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SmartTweaks_For_Windows_11.ui;
+using SmartTweaks_For_Windows_11.service;
 
 namespace SmartTweaks_For_Windows_11
 {

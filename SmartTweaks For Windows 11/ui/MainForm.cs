@@ -16,5 +16,10 @@ namespace SmartTweaks_For_Windows_11.ui
         {
             InitializeComponent();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
