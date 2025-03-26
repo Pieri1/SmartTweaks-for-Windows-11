@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 namespace SmartTweaks_For_Windows_11.service
 {
@@ -14,20 +14,18 @@ namespace SmartTweaks_For_Windows_11.service
             try
             {
                 var json = File.ReadAllText(filePath);
-                var jsonArray = JArray.Parse(json);
+                var jsonArray = JsonDocument.Parse(json).RootElement.EnumerateArray();
 
                 foreach (var item in jsonArray)
                 {
-                    var alias = item["alias"]?.ToString();
-                    if (!string.IsNullOrEmpty(alias))
+                    if (item.TryGetProperty("alias", out var alias))
                     {
-                        aliases.Add(alias);
+                        aliases.Add(alias.GetString());
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions as needed
                 Console.WriteLine($"Error reading JSON: {ex.Message}");
             }
 
