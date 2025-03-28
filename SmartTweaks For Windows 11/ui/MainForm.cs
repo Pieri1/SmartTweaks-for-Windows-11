@@ -38,7 +38,13 @@ namespace SmartTweaks_For_Windows_11.ui
             var jsonBrute = jsonReader.GetJson(relativePath);
             var jsonArray = jsonBrute.RootElement.EnumerateArray();
             var comboBoxItems = new List<string>();
-            int yOffset = 30;
+            int yTaskOffset = 30;
+            int yDeskOffset = 30;
+            int yExpOffset = 30;
+            var tabTaskbar = new TabPage("Taskbar");
+            var tabDesktop = new TabPage("Desktop");
+            var tabExplorer = new TabPage("Explorer");
+
 
             foreach (var item in jsonArray)
             {
@@ -47,28 +53,63 @@ namespace SmartTweaks_For_Windows_11.ui
                 {
                     if (item.TryGetProperty("alias", out var alias))
                     {
-                        if (item.TryGetProperty("opts", out var opts))
+                        if (item.TryGetProperty("cat", out var cat))
                         {
-                            foreach (var opt in opts.EnumerateArray())
+                            if (item.TryGetProperty("opts", out var opts))
                             {
-                                if (opt.TryGetProperty("state", out var state))
+                                foreach (var opt in opts.EnumerateArray())
                                 {
-                                    comboBoxItems.Add(state.GetString());
+                                    if (opt.TryGetProperty("state", out var state))
+                                    {
+                                        comboBoxItems.Add(state.GetString());
+                                    }
+                                }
+
+                                if (cat.GetString() == "Taskbar")
+                                {
+                                    var rowTemplate = new RowTemplate
+                                    {
+                                        Location = new System.Drawing.Point(30, yTaskOffset),
+                                        RowchkboxText = name.GetString(),
+                                        AutoSize = true
+                                    };
+                                    rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString());
+                                    yTaskOffset += rowTemplate.Height + 10;
+                                    tabTaskbar.Controls.Add(rowTemplate);
+                                }
+                                else if (cat.GetString() == "Desktop")
+                                {
+                                    var rowTemplate = new RowTemplate
+                                    {
+                                        Location = new System.Drawing.Point(30, yDeskOffset),
+                                        RowchkboxText = name.GetString(),
+                                        AutoSize = true
+                                    };
+                                    rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString());
+                                    yDeskOffset += rowTemplate.Height + 10;
+                                    tabDesktop.Controls.Add(rowTemplate);
+                                }
+                                else if (cat.GetString() == "Explorer")
+                                {
+                                    var rowTemplate = new RowTemplate
+                                    {
+                                        Location = new System.Drawing.Point(30, yExpOffset),
+                                        RowchkboxText = name.GetString(),
+                                        AutoSize = true
+                                    };
+                                    rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString());
+                                    yExpOffset += rowTemplate.Height + 10;
+                                    tabExplorer.Controls.Add(rowTemplate);
                                 }
                             }
-                            var rowTemplate = new RowTemplate
-                            {
-                                Location = new System.Drawing.Point(30, yOffset),
-                                RowchkboxText = name.GetString(),
-                                AutoSize = true
-                            };
-                            rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString());
-                            this.Controls.Add(rowTemplate);
-                            yOffset += rowTemplate.Height + 10;
                         }
                     }
                 }
             }
+            tabctrl.TabPages.Add(tabDesktop);
+            tabctrl.TabPages.Add(tabExplorer);
+            tabctrl.TabPages.Add(tabTaskbar);
+
         }
     }
 }

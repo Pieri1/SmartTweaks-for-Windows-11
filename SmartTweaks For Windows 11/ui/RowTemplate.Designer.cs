@@ -46,7 +46,7 @@
             // rowcmbbox
             // 
             this.rowcmbbox.FormattingEnabled = true;
-            this.rowcmbbox.Location = new System.Drawing.Point(493, 4);
+            this.rowcmbbox.Location = new System.Drawing.Point(451, 5);
             this.rowcmbbox.Name = "rowcmbbox";
             this.rowcmbbox.Size = new System.Drawing.Size(305, 24);
             this.rowcmbbox.TabIndex = 2;
@@ -58,7 +58,7 @@
             this.Controls.Add(this.rowcmbbox);
             this.Controls.Add(this.rowchkbox);
             this.Name = "RowTemplate";
-            this.Size = new System.Drawing.Size(801, 32);
+            this.Size = new System.Drawing.Size(760, 32);
             this.ResumeLayout(false);
             this.PerformLayout();
 
