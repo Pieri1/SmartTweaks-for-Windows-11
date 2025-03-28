@@ -12,6 +12,7 @@ using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SmartTweaks_For_Windows_11.service;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SmartTweaks_For_Windows_11.ui
 {
@@ -36,59 +37,37 @@ namespace SmartTweaks_For_Windows_11.ui
             string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
             var jsonBrute = jsonReader.GetJson(relativePath);
             var jsonArray = jsonBrute.RootElement.EnumerateArray();
-
-            int xOffset = 30;
+            var comboBoxItems = new List<string>();
             int yOffset = 30;
+
             foreach (var item in jsonArray)
             {
+                comboBoxItems.Clear();
                 if (item.TryGetProperty("name", out var name))
                 {
-                    var label = new Label
+                    if (item.TryGetProperty("alias", out var alias))
                     {
-                        Text = name.GetString(),
-                        Location = new System.Drawing.Point(xOffset, yOffset),
-                        AutoSize = true
-                    };
-                    this.Controls.Add(label);
-                    xOffset += 150;
-                }
-                if (item.TryGetProperty("desc", out var desc))
-                {
-                    var label = new Label
-                    {
-                        Text = desc.GetString(),
-                        Location = new System.Drawing.Point(xOffset, yOffset),
-                        AutoSize = true
-                    };
-                    this.Controls.Add(label);
-                    xOffset += 500;
-                }
-                if(item.TryGetProperty("alias", out var alias))
-                {
-                    if (item.TryGetProperty("opts", out var opts))
-                    {
-                        var comboBox = new ComboBox
+                        if (item.TryGetProperty("opts", out var opts))
                         {
-                            Tag = alias.GetString(),
-                            Location = new System.Drawing.Point(xOffset, yOffset),
-                            Width = 200
-                        };
-
-                        foreach (var opt in opts.EnumerateArray())
-                        {
-                            if (opt.TryGetProperty("state", out var state))
+                            foreach (var opt in opts.EnumerateArray())
                             {
-                                comboBox.Items.Add(state.GetString());
+                                if (opt.TryGetProperty("state", out var state))
+                                {
+                                    comboBoxItems.Add(state.GetString());
+                                }
                             }
+                            var rowTemplate = new RowTemplate
+                            {
+                                Location = new System.Drawing.Point(30, yOffset),
+                                RowchkboxText = name.GetString(),
+                                AutoSize = true
+                            };
+                            rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString());
+                            this.Controls.Add(rowTemplate);
+                            yOffset += rowTemplate.Height + 10;
                         }
-
-                        this.Controls.Add(comboBox);
-                        xOffset += 210;
                     }
                 }
-
-                yOffset += 35;
-                xOffset = 30;
             }
         }
     }

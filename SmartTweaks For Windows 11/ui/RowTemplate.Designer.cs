@@ -28,10 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.rowchkbox = new System.Windows.Forms.CheckBox();
+            this.rowcmbbox = new System.Windows.Forms.ComboBox();
+            this.SuspendLayout();
+            // 
+            // rowchkbox
+            // 
+            this.rowchkbox.AutoSize = true;
+            this.rowchkbox.Location = new System.Drawing.Point(3, 6);
+            this.rowchkbox.Name = "rowchkbox";
+            this.rowchkbox.Size = new System.Drawing.Size(95, 20);
+            this.rowchkbox.TabIndex = 1;
+            this.rowchkbox.Text = "checkBox1";
+            this.rowchkbox.UseVisualStyleBackColor = true;
+            this.rowchkbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // rowcmbbox
+            // 
+            this.rowcmbbox.FormattingEnabled = true;
+            this.rowcmbbox.Location = new System.Drawing.Point(493, 4);
+            this.rowcmbbox.Name = "rowcmbbox";
+            this.rowcmbbox.Size = new System.Drawing.Size(305, 24);
+            this.rowcmbbox.TabIndex = 2;
+            // 
+            // RowTemplate
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.rowcmbbox);
+            this.Controls.Add(this.rowchkbox);
+            this.Name = "RowTemplate";
+            this.Size = new System.Drawing.Size(801, 32);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+        private System.Windows.Forms.CheckBox rowchkbox;
+        private System.Windows.Forms.ComboBox rowcmbbox;
     }
 }
