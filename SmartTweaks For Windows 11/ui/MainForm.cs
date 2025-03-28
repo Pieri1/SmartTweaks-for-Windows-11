@@ -50,7 +50,7 @@ namespace SmartTweaks_For_Windows_11.ui
                         AutoSize = true
                     };
                     this.Controls.Add(label);
-                    xOffset += 100;
+                    xOffset += 150;
                 }
                 if (item.TryGetProperty("desc", out var desc))
                 {
