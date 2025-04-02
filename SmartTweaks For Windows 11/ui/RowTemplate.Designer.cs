@@ -59,6 +59,7 @@
             this.Controls.Add(this.rowchkbox);
             this.Name = "RowTemplate";
             this.Size = new System.Drawing.Size(760, 32);
+            this.Load += new System.EventHandler(this.RowTemplate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

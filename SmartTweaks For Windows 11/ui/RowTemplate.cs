@@ -23,14 +23,20 @@ namespace SmartTweaks_For_Windows_11.ui
             set => rowchkbox.Text = value;
         }
 
-        public void SetComboBoxItems(IEnumerable<string> items, string alias)
+        public void SetComboBoxItems(IEnumerable<string> items, string alias, int selectedindex)
         {
             rowcmbbox.Items.Clear();
             rowcmbbox.Items.AddRange(items.ToArray());
             rowcmbbox.Tag = alias;
+            rowcmbbox.SelectedIndex = selectedindex;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RowTemplate_Load(object sender, EventArgs e)
         {
 
         }

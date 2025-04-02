@@ -4,7 +4,8 @@
         "name": "This computer icon",
         "desc": "Create the 'This computer' icon on Desktop",
         "cat": "Desktop",
-        "reg": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\HideDesktopIcons\\NewStartPanel",
+        "reg": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\HideDesktopIcons\\NewStartPanel",
+        "key": "{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
         "opts": [
             {
                 "state": "False",
@@ -17,12 +18,6 @@
                 "value": "1",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\HideDesktopIcons\\NewStartPanel\" /v \"{20D04FE0-3AEA-1069-A2D8-08002B30309D}\" /t REG_DWORD /d 1 /f",
                 "img": "compicon1"
-            },
-            {
-                "state": "Do not change",
-                "value":  "",
-                "cmd": "",
-                "img": "donotchange"
             }
         ]
     },
@@ -31,22 +26,19 @@
         "name": "Context Menu",
         "desc": "Switch between the old and new context menu called by the right-click",
         "cat": "Desktop",
-        "reg": "HKEY_CURRENT_USER\\SOFTWARE\\CLASSES\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
+        "reg": "SOFTWARE\\CLASSES\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
         "opts": [
             {
-                "state": "New",
-                "cmd": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\CLASSES\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /ve /t REG_SZ /d 1 /f",
-                "img": "contmenu0"
-            },
-            {
                 "state": "Old",
+                "value": "0",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\CLASSES\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /ve /t REG_SZ /d 0 /f",
                 "img": "contmenu1"
             },
             {
-                "state": "Do not change",
-                "cmd": "",
-                "img": "donotchange"
+                "state": "New",
+                "value": "1",
+                "cmd": "reg add \"HKEY_CURRENT_USER\\SOFTWARE\\CLASSES\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /ve /t REG_SZ /d 1 /f",
+                "img": "contmenu0"
             }
         ]
     },
@@ -55,21 +47,20 @@
         "name": "Path of current folder",
         "desc": "Display the name or the full path to the folder the explorer is currently on",
         "cat": "Explorer",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+        "key": "FullPath",
         "opts": [
             {
                 "state": "Just name",
+                "value": "0",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\" /v \"FullPath\" /t REG_DWORD /d 0 /f",
                 "img": "disppath1"
             },
             {
                 "state": "Full path",
+                "value": "1",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\" /v \"FullPath\" /t REG_DWORD /d 1 /f",
                 "img": "disppath2"
-            },
-            {
-                "state": "Do not change",
-                "cmd": "",
-                "img": "donotchange"
             }
         ]
     },
@@ -78,21 +69,20 @@
         "name": "Hidden Files and Folders",
         "desc": "Choose if you want to show hidden folders and files on Explorer",
         "cat": "Explorer",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "Hidden",
         "opts": [
             {
                 "state": "Do not show",
+                "value": "2",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"Hidden\" /t REG_DWORD /d 2 /f",
                 "img": "hidefile1"
             },
             {
                 "state": "Show",
+                "value": "1",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"Hidden\" /t REG_DWORD /d 1 /f",
                 "img": "hidefile2"
-            },
-            {
-                "state": "Do not change",
-                "cmd": "",
-                "img": "donotchange"
             }
         ]
     },
@@ -101,21 +91,20 @@
         "name": "Show file extensions",
         "desc": "Choose between showing or hiding files extension",
         "cat": "Explorer",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "HideFileExt",
         "opts": [
             {
                 "state": "Hide extension",
+                "value": "1",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"HideFileExt\" /t REG_DWORD /d 1 /f",
                 "img": "fileext1"
             },
             {
                 "state": "Show extension",
+                "value": "0",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"HideFileExt\" /t REG_DWORD /d 0 /f",
                 "img": "fileext2"
-            },
-            {
-                "state": "Do not change",
-                "cmd": "",
-                "img": "donotchange"
             }
         ]
     },
@@ -124,21 +113,20 @@
         "name": "Explorer Compact Mode",
         "desc": "Choose the spacing between itens on Explorer",
         "cat": "Explorer",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "UseCompactMode",
         "opts": [
             {
                 "state": "Normal",
+                "value": "0",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"UseCompactMode\" /t REG_DWORD /d 0 /f",
                 "img": "explorermode1"
             },
             {
                 "state": "Compact Mode",
+                "value": "1",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"UseCompactMode\" /t REG_DWORD /d 1 /f",
                 "img": "explorermode2"
-            },
-            {
-                "state": "Do not change",
-                "cmd": "",
-                "img": "donotchange"
             }
         ]
     },
@@ -147,21 +135,20 @@
         "name": "Highlight compressed and encrypted files",
         "desc": "Chooses between painting or not compressed and encrypted files with a different color than regular files",
         "cat": "Explorer",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "ShowEncryptCompressedColor",
         "opts": [
             {
                 "state": "Do not highlight",
+                "value": "0",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowEncryptCompressedColor\" /t REG_DWORD /d 0 /f",
                 "img": "highcomp1"
             },
             {
                 "state": "Highlight",
+                "value": "1",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowEncryptCompressedColor\" /t REG_DWORD /d 1 /f",
                 "img": "highcomp2"
-            },
-            {
-                "state": "Do not change",
-                "cmd": "",
-                "img": "donotchange"
             }
         ]
     },
@@ -170,26 +157,26 @@
         "name": "Task Bar Icons Behavior",
         "desc": "Chooses when equal taskbar icons will combine",
         "cat": "Taskbar",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "TaskbarGlomLevel",
         "opts": [
             {
                 "state": "Always",
+                "value": "0",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"TaskbarGlomLevel\" /t REG_DWORD /d 0 /f",
                 "img": "tskbarbehav0"
             },
             {
                 "state": "Only when full",
+                "value": "1",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"TaskbarGlomLevel\" /t REG_DWORD /d 1 /f",
                 "img": "tskbarbehav1"
             },
             {
                 "state": "Never",
+                "value": "2",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"TaskbarGlomLevel\" /t REG_DWORD /d 2 /f",
                 "img": "tskbarbehav2"
-            },
-            {
-                "state": "Do not change",
-                "cmd": "",
-                "img": "donotchange"
             }
         ]
     },
@@ -198,21 +185,20 @@
         "name": "Start Button Location",
         "desc": "Selects where the Start Button will be located",
         "cat": "Taskbar",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "TaskbarAl",
         "opts": [
             {
                 "state": "Center",
+                "value": "1",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"TaskbarAl\" /t REG_DWORD /d 1 /f",
                 "img": "startbtn1"
             },
             {
                 "state": "Left",
+                "value": "0",
                 "cmd": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"TaskbarAl\" /t REG_DWORD /d 0 /f",
                 "img": "startbtn2"
-            },
-            {
-                "state": "Do not change",
-                "cmd": "",
-                "img": "donotchange"
             }
         ]
     }

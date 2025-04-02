@@ -23,5 +23,23 @@ namespace SmartTweaks_For_Windows_11.service
 
             return jsonArray;
         }
+
+        public JsonDocument GetCmdString(string filePath, string alias, string opt)
+        {
+            JsonDocument jsonArray = null;
+
+            try
+            {
+                var json = File.ReadAllText(filePath);
+                jsonArray = JsonDocument.Parse(json);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading JSON: {ex.Message}");
+            }
+
+            return jsonArray;
+
+        }
     }
 }
