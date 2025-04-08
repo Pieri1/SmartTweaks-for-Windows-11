@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Xml.Linq;
 
 namespace SmartTweaks_For_Windows_11.service
 {
@@ -24,21 +25,44 @@ namespace SmartTweaks_For_Windows_11.service
             return jsonArray;
         }
 
-        public JsonDocument GetCmdString(string filePath, string alias, string opt)
+        public string GetCmdString(string filePath, string alias, string optState)
         {
-            JsonDocument jsonArray = null;
-
+            string altOpt = optState.Split('(')[0];
             try
             {
                 var json = File.ReadAllText(filePath);
-                jsonArray = JsonDocument.Parse(json);
+                var jsonArray = JsonDocument.Parse(json).RootElement.EnumerateArray();
+
+                foreach (var item in jsonArray)
+                {
+                    if (item.TryGetProperty("alias", out var aliasProp) && aliasProp.GetString() == alias)
+                    {
+                        if (item.TryGetProperty("opts", out var opts))
+                        {
+                            foreach (var opt in opts.EnumerateArray())
+                            {
+                                if (opt.TryGetProperty("state", out var state))
+                                {
+                                    Console.WriteLine("state: " + state.GetString() + " ,opt: " + optState + " ,altopt: " + altOpt);
+                                    if (state.GetString().Equals(optState) || state.GetString().Equals(altOpt))
+                                    {
+                                        if (opt.TryGetProperty("cmd", out var cmd))
+                                        {
+                                            return cmd.GetString();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading JSON: {ex.Message}");
             }
 
-            return jsonArray;
+            return null;
 
         }
     }

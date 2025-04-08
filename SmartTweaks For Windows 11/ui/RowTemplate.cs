@@ -31,9 +31,31 @@ namespace SmartTweaks_For_Windows_11.ui
             rowcmbbox.SelectedIndex = selectedindex;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        public bool RowchkboxCheck
         {
+            get => rowchkbox.Checked; 
+        }
 
+        public string RowcmbboxText
+        {
+            get => rowcmbbox.SelectedItem.ToString();
+        }
+
+        public string RowcmbboxTag
+        {
+            get => rowcmbbox.Tag.ToString();
+        }
+
+        private void Rowchkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rowchkbox.Checked)
+            {
+                rowcmbbox.Enabled = true;
+            }
+            else
+            {
+                rowcmbbox.Enabled = false;
+            }
         }
 
         private void RowTemplate_Load(object sender, EventArgs e)

@@ -48,6 +48,7 @@ namespace SmartTweaks_For_Windows_11.ui
             int yTaskOffset = 30;
             int yDeskOffset = 30;
             int yExpOffset = 30;
+            tabctrl.TabPages.Clear();
             var tabTaskbar = new TabPage("Taskbar");
             var tabDesktop = new TabPage("Desktop");
             var tabExplorer = new TabPage("Explorer");
@@ -86,19 +87,27 @@ namespace SmartTweaks_For_Windows_11.ui
                                         {
                                             if (opt.TryGetProperty("value", out var value))
                                             {
+                                                if (curcfg == null)
+                                                {
+                                                    curcfg = "";
+                                                }
+
                                                 if (opt.Equals(opts.EnumerateArray().Last()) && dftopt == false)
                                                 {
-                                                    comboBoxItems.Add(state.GetString() + " (On Use)");
+                                                    Console.WriteLine("alias: " + alias + "curcfg: " + curcfg + " ,value: " + value.GetString());
+                                                    comboBoxItems.Add(state.GetString() + "(On Use)");
                                                     comboBoxIndex = comboBoxItems.Count - 1;
                                                 }
-                                                else if (curcfg == value.GetString())
+                                                else if (curcfg.Equals(value.GetString()))
                                                 {
+                                                    Console.WriteLine("alias: " + alias + "curcfg: " + curcfg + " ,value: " + value.GetString());
                                                     dftopt = true;
-                                                    comboBoxItems.Add(state.GetString() + " (On Use)");
+                                                    comboBoxItems.Add(state.GetString() + "(On Use)");
                                                     comboBoxIndex = comboBoxItems.Count - 1;
                                                 }
                                                 else
                                                 {
+                                                    Console.WriteLine("alias: " + alias + "curcfg: " + curcfg + " ,value: " + value.GetString());
                                                     comboBoxItems.Add(state.GetString());
                                                 }
                                             }
@@ -161,9 +170,34 @@ namespace SmartTweaks_For_Windows_11.ui
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnexecute_Click(object sender, EventArgs e)
         {
-
+            // Maybe this path will be a problem when the application is installed on a different machine
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
+            string ps1Path = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\run.ps1");
+            SettingAgent settingAgent = new SettingAgent();
+            JsonReader jsonReader = new JsonReader();
+            RegistryAgent registryAgent = new RegistryAgent();
+            settingAgent.ClearPs1File(ps1Path);
+            settingAgent.StartingPs1File(ps1Path);
+            foreach (TabPage tabPage in tabctrl.TabPages)
+            {
+                foreach (Control control in tabPage.Controls)
+                {
+                    if (control is RowTemplate rowTemplate)
+                    {
+                        if (rowTemplate.RowchkboxCheck)
+                        {
+                            string cmdline = jsonReader.GetCmdString(relativePath,rowTemplate.RowcmbboxTag, rowTemplate.RowcmbboxText);
+                            settingAgent.AppendToPs1File(cmdline, ps1Path);
+                        }
+                    }
+                }
+            }
+            settingAgent.EndingPs1File(ps1Path);
+            registryAgent.RunPs1File(ps1Path);
+            SetUpForm();
         }
 
         private void lblDesc_Click(object sender, EventArgs e)

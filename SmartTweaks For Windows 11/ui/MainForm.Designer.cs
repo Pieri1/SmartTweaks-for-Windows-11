@@ -54,7 +54,7 @@
             this.btnexecute.TabIndex = 1;
             this.btnexecute.Text = "Run";
             this.btnexecute.UseVisualStyleBackColor = true;
-            this.btnexecute.Click += new System.EventHandler(this.button1_Click);
+            this.btnexecute.Click += new System.EventHandler(this.btnexecute_Click);
             // 
             // btnsave
             // 
