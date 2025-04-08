@@ -19,10 +19,12 @@ namespace SmartTweaks_For_Windows_11.ui
 {
     public partial class MainForm : Form
     {
+
         public MainForm()
         {
             InitializeComponent();
             SetUpForm();
+            saveState();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -170,12 +172,12 @@ namespace SmartTweaks_For_Windows_11.ui
 
         }
 
-        private void btnexecute_Click(object sender, EventArgs e)
+        private string updateTempPs1()
         {
             // Maybe this path will be a problem when the application is installed on a different machine
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
-            string ps1Path = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\run.ps1");
+            string ps1Path = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\Run.ps1");
             SettingAgent settingAgent = new SettingAgent();
             JsonReader jsonReader = new JsonReader();
             RegistryAgent registryAgent = new RegistryAgent();
@@ -189,18 +191,80 @@ namespace SmartTweaks_For_Windows_11.ui
                     {
                         if (rowTemplate.RowchkboxCheck)
                         {
-                            string cmdline = jsonReader.GetCmdString(relativePath,rowTemplate.RowcmbboxTag, rowTemplate.RowcmbboxText);
+                            string cmdline = jsonReader.GetCmdString(relativePath, rowTemplate.RowcmbboxTag, rowTemplate.RowcmbboxText);
                             settingAgent.AppendToPs1File(cmdline, ps1Path);
                         }
                     }
                 }
             }
             settingAgent.EndingPs1File(ps1Path);
+            return ps1Path;
+        }
+
+        private void saveState()
+        {
+            // Maybe this path will be a problem when the application is installed on a different machine
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
+            string Ps1Path = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\SaveState.ps1");
+            SettingAgent settingAgent = new SettingAgent();
+            JsonReader jsonReader = new JsonReader();
+            RegistryAgent registryAgent = new RegistryAgent();
+            settingAgent.ClearPs1File(Ps1Path);
+            settingAgent.StartingPs1File(Ps1Path);
+            foreach (TabPage tabPage in tabctrl.TabPages)
+            {
+                foreach (Control control in tabPage.Controls)
+                {
+                    if (control is RowTemplate rowTemplate)
+                    {
+                        string cmdline = jsonReader.GetCmdString(relativePath, rowTemplate.RowcmbboxTag, rowTemplate.RowcmbboxText);
+                        settingAgent.AppendToPs1File(cmdline, Ps1Path);
+                    }
+                }
+            }
+            settingAgent.EndingPs1File(Ps1Path);
+        }
+
+        private void btnexecute_Click(object sender, EventArgs e)
+        {
+            // Maybe this path will be a problem when the application is installed on a different machine
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string SaveStatePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\SaveState.ps1");
+            string BackUpPath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\BackUp.ps1");
+            SettingAgent settingAgent = new SettingAgent();
+            RegistryAgent registryAgent = new RegistryAgent();
+            settingAgent.BackupPs1File(SaveStatePath, BackUpPath);
+            saveState();
+            string ps1Path = updateTempPs1();
             registryAgent.RunPs1File(ps1Path);
             SetUpForm();
+            btnrevert.Enabled = true;
         }
 
         private void lblDesc_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnsave_Click(object sender, EventArgs e)
+        {
+            SettingAgent settingAgent = new SettingAgent();
+            string ps1Path = updateTempPs1();
+            settingAgent.SavePs1File(ps1Path);
+        }
+
+        private void btnrevert_Click(object sender, EventArgs e)
+        {
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string BackUpPath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\BackUp.ps1");
+            RegistryAgent registryAgent = new RegistryAgent();
+            registryAgent.RunPs1File(BackUpPath);
+            SetUpForm();
+            btnrevert.Enabled = false;
+        }
+
+        private void btnload_Click(object sender, EventArgs e)
         {
 
         }

@@ -53,5 +53,30 @@ namespace SmartTweaks_For_Windows_11.service
             AppendToPs1File("Start-Process explorer.exe", filePath);
             AppendToPs1File("Write-Output \"[+] Explorer reiniciado com sucesso.\"", filePath);
         }
+
+        public void SavePs1File(string tempPath)
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Title = "Save configuration file";
+                saveDialog.FileName = "MyConfig.ps1";
+                saveDialog.Filter = "PowerShell Script (*.ps1)|*.ps1|All files (*.*)|*.*";
+                saveDialog.DefaultExt = "ps1";
+
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string targetPath = saveDialog.FileName;
+
+                    System.IO.File.Copy(tempPath, targetPath, true);
+
+                    MessageBox.Show("Arquivo salvo em:\n" + targetPath, "Sucesso");
+                }
+            }
+        }
+
+        public void BackupPs1File(string tempPath, string targetPath)
+        {
+            System.IO.File.Copy(tempPath, targetPath, true);
+        }
     }
 }
