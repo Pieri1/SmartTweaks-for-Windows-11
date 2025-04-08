@@ -25,6 +25,29 @@ namespace SmartTweaks_For_Windows_11.service
             return jsonArray;
         }
 
+        public JsonElement? GetJsonItem(string filePath, string alias)
+        {
+            try
+            {
+                var json = File.ReadAllText(filePath);
+                var jsonArray = JsonDocument.Parse(json).RootElement.EnumerateArray();
+
+                foreach (var item in jsonArray)
+                {
+                    if (item.TryGetProperty("alias", out var aliasProp) && aliasProp.GetString() == alias)
+                    {
+                        return item;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading JSON: {ex.Message}");
+            }
+
+            return null;
+        }
+
         public string GetCmdString(string filePath, string alias, string optState)
         {
             string altOpt = optState.Split('(')[0];

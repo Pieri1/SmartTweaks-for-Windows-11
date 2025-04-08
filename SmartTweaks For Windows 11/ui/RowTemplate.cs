@@ -31,6 +31,18 @@ namespace SmartTweaks_For_Windows_11.ui
             rowcmbbox.SelectedIndex = selectedindex;
         }
 
+        public void SelectComboBoxItem(string item)
+        {
+            if(rowcmbbox.Items.Contains(item))
+            {
+                rowcmbbox.SelectedItem = item;
+            }
+            else if(rowcmbbox.Items.Contains(item + "(On Use)"))
+            {
+                rowcmbbox.SelectedItem = item + "(On Use)";
+            }
+        }
+
         public bool RowchkboxCheck
         {
             get => rowchkbox.Checked; 

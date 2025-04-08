@@ -266,7 +266,43 @@ namespace SmartTweaks_For_Windows_11.ui
 
         private void btnload_Click(object sender, EventArgs e)
         {
-
+            JsonReader jsonReader = new JsonReader();
+            SettingAgent settingAgent = new SettingAgent();
+            // Maybe this path will be a problem when the application is installed on a different machine
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
+            var jsonBrute = jsonReader.GetJson(relativePath);
+            var jsonArray = jsonBrute.RootElement.EnumerateArray();
+            var scriptLines = settingAgent.ReadPs1File();
+            foreach (TabPage tabPage in tabctrl.TabPages)
+            {
+                foreach (Control control in tabPage.Controls)
+                {
+                    if (control is RowTemplate rowTemplate)
+                    {
+                        var item = jsonReader.GetJsonItem(relativePath, rowTemplate.RowcmbboxTag);
+                        if (item.Value.TryGetProperty("opts", out var opts))
+                        {
+                            foreach (var opt in opts.EnumerateArray())
+                            {
+                                if (opt.TryGetProperty("cmd", out var cmd))
+                                {
+                                    foreach(var line in scriptLines)
+                                    {
+                                        if (line.Contains(cmd.GetString()))
+                                        {
+                                            if (opt.TryGetProperty("state", out var state))
+                                            {
+                                                rowTemplate.SelectComboBoxItem(opt.GetProperty("state").GetString());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

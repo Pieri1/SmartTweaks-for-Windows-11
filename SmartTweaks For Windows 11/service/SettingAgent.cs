@@ -78,5 +78,27 @@ namespace SmartTweaks_For_Windows_11.service
         {
             System.IO.File.Copy(tempPath, targetPath, true);
         }
+
+        public string[] ReadPs1File()
+        {
+            using (OpenFileDialog openDialog = new OpenFileDialog())
+            {
+                openDialog.Title = "Open configuration file";
+                openDialog.Filter = "PowerShell Script (*.ps1)|*.ps1|All files (*.*)|*.*";
+                openDialog.DefaultExt = "ps1";
+                openDialog.CheckFileExists = true;
+
+                if (openDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedPath = openDialog.FileName;
+
+                    MessageBox.Show("Arquivo selecionado:\n" + selectedPath, "Sucesso");
+
+                    var scriptLines = File.ReadAllLines(selectedPath);
+                    return scriptLines;
+                }
+            }
+            return null;
+        }
     }
 }
