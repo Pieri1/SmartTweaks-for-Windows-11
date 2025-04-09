@@ -36,7 +36,7 @@
             // 
             this.rowchkbox.AutoSize = true;
             this.rowchkbox.Location = new System.Drawing.Point(2, 5);
-            this.rowchkbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rowchkbox.Margin = new System.Windows.Forms.Padding(2);
             this.rowchkbox.Name = "rowchkbox";
             this.rowchkbox.Size = new System.Drawing.Size(80, 17);
             this.rowchkbox.TabIndex = 1;
@@ -48,10 +48,10 @@
             // 
             this.rowcmbbox.Enabled = false;
             this.rowcmbbox.FormattingEnabled = true;
-            this.rowcmbbox.Location = new System.Drawing.Point(338, 4);
-            this.rowcmbbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rowcmbbox.Location = new System.Drawing.Point(227, 3);
+            this.rowcmbbox.Margin = new System.Windows.Forms.Padding(2);
             this.rowcmbbox.Name = "rowcmbbox";
-            this.rowcmbbox.Size = new System.Drawing.Size(230, 21);
+            this.rowcmbbox.Size = new System.Drawing.Size(140, 21);
             this.rowcmbbox.TabIndex = 2;
             // 
             // RowTemplate
@@ -60,9 +60,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.rowcmbbox);
             this.Controls.Add(this.rowchkbox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "RowTemplate";
-            this.Size = new System.Drawing.Size(570, 26);
+            this.Size = new System.Drawing.Size(369, 26);
             this.Load += new System.EventHandler(this.RowTemplate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

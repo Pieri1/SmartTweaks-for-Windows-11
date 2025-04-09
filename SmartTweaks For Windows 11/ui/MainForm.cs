@@ -201,6 +201,20 @@ namespace SmartTweaks_For_Windows_11.ui
             return ps1Path;
         }
 
+        private void changeCheckBoxState(bool state)
+        {
+            foreach (TabPage tabPage in tabctrl.TabPages)
+            {
+                foreach (Control control in tabPage.Controls)
+                {
+                    if (control is RowTemplate rowTemplate)
+                    {
+                        rowTemplate.RowchkboxCheck = state;
+                    }
+                }
+            }
+        }
+
         private void saveState()
         {
             // Maybe this path will be a problem when the application is installed on a different machine
@@ -303,6 +317,15 @@ namespace SmartTweaks_For_Windows_11.ui
                     }
                 }
             }
+        }
+        private void btnselect_Click(object sender, EventArgs e)
+        {
+            changeCheckBoxState(true);
+        }
+
+        private void btndeselect_Click(object sender, EventArgs e)
+        {
+            changeCheckBoxState(false);
         }
     }
 }

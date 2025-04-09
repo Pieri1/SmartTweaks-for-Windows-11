@@ -46,6 +46,7 @@ namespace SmartTweaks_For_Windows_11.ui
         public bool RowchkboxCheck
         {
             get => rowchkbox.Checked; 
+            set => rowchkbox.Checked = value;
         }
 
         public string RowcmbboxText
