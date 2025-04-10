@@ -210,5 +210,247 @@
                 "img": "startbtn2"
             }
         ]
+    },
+    {
+        "teste": "",
+        "alias": "tskbarbadge",
+        "name": "Taskbar Badges",
+        "desc": "Show or hide badges on taskbar icons (Number of notification)",
+        "cat": "Taskbar",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "TaskbarBadges",
+        "opts": [
+            {
+                "state": "Show",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'TaskbarBadges' -Type DWord -Value 1",
+                "img": ""
+            },
+            {
+                "state": "Hide",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'TaskbarBadges' -Type DWord -Value 0",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "",
+        "alias": "tskbaranim",
+        "name": "Taskbar Animations",
+        "desc": "",
+        "cat": "Taskbar",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "TaskbarAnimations",
+        "opts": [
+            {
+                "state": "",
+                "value": "",
+                "cmd": "",
+                "img": ""
+            },
+            {
+                "state": "",
+                "value": "",
+                "cmd": "",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "",
+        "alias": "copilotbtn",
+        "name": "Copilot Button",
+        "desc": "Show or hide Copilot button",
+        "cat": "Taskbar",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "ShowCopilotButton",
+        "opts": [
+            {
+                "state": "Show",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'ShowCopilotButton' -Type DWord -Value 1",
+                "img": ""
+            },
+            {
+                "state": "Hide",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'ShowCopilotButton' -Type DWord -Value 0",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "",
+        "alias": "tskbarwidget",
+        "name": "Taskbar Widgets",
+        "desc": "Show or hide the widgets button on the taskbar",
+        "cat": "Taskbar",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "TaskbarDa",
+        "opts": [
+            {
+                "state": "Show",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'TaskbarDa' -Type DWord -Value 1",
+                "img": ""
+            },
+            {
+                "state": "Hide",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'TaskbarDa' -Type DWord -Value 0",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "funcionando",
+        "alias": "explorerstart",
+        "name": "Explorer Start Page",
+        "desc": "Choose in which path will Explorer start",
+        "cat": "Explorer",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "key": "LaunchTo",
+        "opts": [
+            {
+                "state": "Start",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'LaunchTo' -Type DWord -Value 0",
+                "img": ""
+            },
+            {
+                "state": "My Computer",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'LaunchTo' -Type DWord -Value 1",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "",
+        "alias": "searchbar",
+        "name": "Taskbar Search Bar",
+        "desc": "Selects the behavior for the Search option on taskbar",
+        "cat": "Taskbar",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "key": "SearchboxTaskbarMode",
+        "opts": [
+            {
+                "state": "Hide",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'SearchboxTaskbarMode' -Type DWord -Value 0",
+                "img": ""
+            },
+            {
+                "state": "Search icon only",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'SearchboxTaskbarMode' -Type DWord -Value 1",
+                "img": ""
+            },
+            {
+                "state": "Search box and label",
+                "value": "2",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'SearchboxTaskbarMode' -Type DWord -Value 2",
+                "img": ""
+            },
+            {
+                "state": "Search box",
+                "value": "3",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'SearchboxTaskbarMode' -Type DWord -Value 3",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "PROBLEMA",
+        "alias": "menushtcut",
+        "name": "Verificar depois, menu ctrl",
+        "desc": "Verificar, mas fala que muda sublinhado de atalho de itens",
+        "cat": "ControlPanel",
+        "reg": "Control Panel\\Accessibility\\Keyboard Preference",
+        "key": "On",
+        "opts": [
+            {
+                "state": "Não",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Control Panel\\Accessibility\\Keyboard Preference' -Name 'On' -Type DWord -Value 0",
+                "img": ""
+            },
+            {
+                "state": "Sim",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Control Panel\\Accessibility\\Keyboard Preference' -Name 'On' -Type DWord -Value 1",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "funcionando",
+        "alias": "ctrlexib",
+        "name": "Icons Display Mode",
+        "desc": "Selects how icons will be shown on Control Panel",
+        "cat": "ControlPanel",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
+        "key": "StartupPage",
+        "opts": [
+            {
+                "state": "Icons",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel' -Name 'StartupPage' -Type DWord -Value 1",
+                "img": ""
+            },
+            {
+                "state": "Categories",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel' -Name 'StartupPage' -Type DWord -Value 0",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "funcionando",
+        "alias": "ctrlsize",
+        "name": "Icons Size",
+        "desc": "Select the size of each Control Panel icon (Just work on Icons)",
+        "cat": "ControlPanel",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
+        "key": "AllItemsIconView",
+        "opts": [
+            {
+                "state": "Big",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel' -Name 'AllItemsIconView' -Type DWord -Value 0",
+                "img": ""
+            },
+            {
+                "state": "Small",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel' -Name 'AllItemsIconView' -Type DWord -Value 1",
+                "img": ""
+            }
+        ]
+    },
+    {
+        "teste": "funcionando",
+        "alias": "wintheme",
+        "name": "Windows Theme",
+        "desc": "Turns on and off dark mode for Windows",
+        "cat": "Desktop",
+        "reg": "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+        "key": "SystemUseLightTheme",
+        "opts": [
+            {
+                "state": "Dark Theme",
+                "value": "0",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'SystemUseLightTheme' -Type DWord -Value 0; Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'AppsUseLightTheme' -Type DWord -Value 0",
+                "img": ""
+            },
+            {
+                "state": "Light Theme",
+                "value": "1",
+                "cmd": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'SystemUseLightTheme' -Type DWord -Value 1; Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'AppsUseLightTheme' -Type DWord -Value 1",
+                "img": ""
+            }
+        ]
     }
 ]

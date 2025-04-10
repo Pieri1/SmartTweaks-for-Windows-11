@@ -46,7 +46,7 @@
             this.tabctrl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabctrl.Name = "tabctrl";
             this.tabctrl.SelectedIndex = 0;
-            this.tabctrl.Size = new System.Drawing.Size(591, 585);
+            this.tabctrl.Size = new System.Drawing.Size(591, 379);
             this.tabctrl.TabIndex = 0;
             this.tabctrl.SelectedIndexChanged += new System.EventHandler(this.tabctrl_SelectedIndexChanged);
             // 
@@ -86,7 +86,7 @@
             // lblDesc
             // 
             this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(12, 604);
+            this.lblDesc.Location = new System.Drawing.Point(12, 398);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(161, 16);
             this.lblDesc.TabIndex = 4;
@@ -103,7 +103,7 @@
             // 
             this.btnrevert.Enabled = false;
             this.btnrevert.Location = new System.Drawing.Point(609, 179);
-            this.btnrevert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnrevert.Margin = new System.Windows.Forms.Padding(4);
             this.btnrevert.Name = "btnrevert";
             this.btnrevert.Size = new System.Drawing.Size(137, 23);
             this.btnrevert.TabIndex = 5;
@@ -136,7 +136,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(753, 834);
+            this.ClientSize = new System.Drawing.Size(753, 423);
             this.Controls.Add(this.btndeselect);
             this.Controls.Add(this.btnselect);
             this.Controls.Add(this.btnrevert);

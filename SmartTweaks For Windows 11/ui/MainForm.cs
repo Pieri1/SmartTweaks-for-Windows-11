@@ -50,10 +50,12 @@ namespace SmartTweaks_For_Windows_11.ui
             int yTaskOffset = 30;
             int yDeskOffset = 30;
             int yExpOffset = 30;
+            int yCtrlOffset = 30;
             tabctrl.TabPages.Clear();
             var tabTaskbar = new TabPage("Taskbar");
             var tabDesktop = new TabPage("Desktop");
             var tabExplorer = new TabPage("Explorer");
+            var tabControl = new TabPage("Control Panel");
 
 
             foreach (var item in jsonArray)
@@ -125,7 +127,7 @@ namespace SmartTweaks_For_Windows_11.ui
                                             AutoSize = true
                                         };
 
-                                        rowTemplate.MouseEnter += (sender, e) => lblDesc.Text = desc.ToString();
+                                        rowTemplate.MouseEnter += (sender, e) => lblDesc.Text = "Description: " + desc.ToString();
 
                                         rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString(),comboBoxIndex);
                                         yTaskOffset += rowTemplate.Height + 10;
@@ -140,7 +142,7 @@ namespace SmartTweaks_For_Windows_11.ui
                                             AutoSize = true
                                         };
 
-                                        rowTemplate.MouseEnter += (sender, e) => lblDesc.Text = desc.ToString();
+                                        rowTemplate.MouseEnter += (sender, e) => lblDesc.Text = "Description: " + desc.ToString();
 
                                         rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString(),comboBoxIndex);
                                         yDeskOffset += rowTemplate.Height + 10;
@@ -155,11 +157,26 @@ namespace SmartTweaks_For_Windows_11.ui
                                             AutoSize = true
                                         };
 
-                                        rowTemplate.MouseEnter += (sender, e) => lblDesc.Text = desc.ToString();
+                                        rowTemplate.MouseEnter += (sender, e) => lblDesc.Text = "Description: " + desc.ToString();
 
                                         rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString(), comboBoxIndex);
                                         yExpOffset += rowTemplate.Height + 10;
                                         tabExplorer.Controls.Add(rowTemplate);
+                                    }
+                                    else if (cat.GetString() == "ControlPanel")
+                                    {
+                                        var rowTemplate = new RowTemplate
+                                        {
+                                            Location = new System.Drawing.Point(30, yCtrlOffset),
+                                            RowchkboxText = name.GetString(),
+                                            AutoSize = true
+                                        };
+
+                                        rowTemplate.MouseEnter += (sender, e) => lblDesc.Text = "Description: " + desc.ToString();
+
+                                        rowTemplate.SetComboBoxItems(comboBoxItems, alias.GetString(), comboBoxIndex);
+                                        yCtrlOffset += rowTemplate.Height + 10;
+                                        tabControl.Controls.Add(rowTemplate);
                                     }
                                 }
                             }
@@ -169,7 +186,7 @@ namespace SmartTweaks_For_Windows_11.ui
             tabctrl.TabPages.Add(tabDesktop);
             tabctrl.TabPages.Add(tabExplorer);
             tabctrl.TabPages.Add(tabTaskbar);
-
+            tabctrl.TabPages.Add(tabControl);
         }
 
         private string updateTempPs1()
