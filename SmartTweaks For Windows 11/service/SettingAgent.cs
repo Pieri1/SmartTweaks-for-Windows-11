@@ -50,7 +50,7 @@ namespace SmartTweaks_For_Windows_11.service
             AppendToPs1File("# Reinício do Explorer", filePath);
             AppendToPs1File("Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue", filePath);
             AppendToPs1File("Start-Sleep -Milliseconds 500", filePath);
-            AppendToPs1File("Start-Process explorer.exe", filePath);
+            // AppendToPs1File("Start-Process explorer.exe -NoNewWindow", filePath);
             AppendToPs1File("Write-Output \"[+] Explorer reiniciado com sucesso.\"", filePath);
         }
 

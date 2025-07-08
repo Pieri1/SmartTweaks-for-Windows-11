@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Channels;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -19,10 +20,30 @@ namespace SmartTweaks_For_Windows_11.ui
 {
     public partial class MainForm : Form
     {
+        // Colors
+        public static readonly Color BackgroundColor = ColorTranslator.FromHtml("#1e1e1e");
+        public static readonly Color AccentColor = ColorTranslator.FromHtml("#3f3f3f");
+        public static readonly Color PrimaryFontColor = ColorTranslator.FromHtml("#d4d4d4");
+        public static readonly Color SecundaryFontColor = ColorTranslator.FromHtml("#858585");
+        public static readonly Color BorderDividerColor = ColorTranslator.FromHtml("#333333");
+
+        // Fonts
+        public const string FontName = "Segoe UI";
+        public const int TitleFontSize = 16;
+        public const int TextFontSize = 12;
+        public const int SecundaryTextFontSize = 9;
+
+        // Spacing
+        public const int PaddingSmall = 8;
+        public const int PaddingLarge = 16;
+
+        // RoundedBorder
+        public const int BorderRadius = 4;
 
         public MainForm()
         {
             InitializeComponent();
+            StyleUpForm();
             SetUpForm();
             saveState();
         }
@@ -35,6 +56,35 @@ namespace SmartTweaks_For_Windows_11.ui
         private void tabctrl_SelectedIndexChanged(object sender, EventArgs e)
         {
             lblDesc.Text = "Hover to show description";
+        }
+
+        private void StyleUpForm()
+        {
+            this.BackColor = BackgroundColor;
+            this.ForeColor = PrimaryFontColor;
+            btnselect.BackColor = AccentColor;
+            btnselect.ForeColor = PrimaryFontColor;
+            btnselect.Font = new Font(FontName, TextFontSize, FontStyle.Regular);
+            btndeselect.BackColor = AccentColor;
+            btndeselect.ForeColor = PrimaryFontColor;
+            btndeselect.Font = new Font(FontName, TextFontSize, FontStyle.Regular);
+            btnexecute.BackColor = AccentColor;
+            btnexecute.ForeColor = PrimaryFontColor;
+            btnexecute.Font = new Font(FontName, TextFontSize, FontStyle.Regular);
+            btnsave.BackColor = AccentColor;
+            btnsave.ForeColor = PrimaryFontColor;
+            btnsave.Font = new Font(FontName, TextFontSize, FontStyle.Regular);
+            btnload.BackColor = AccentColor;
+            btnload.ForeColor = PrimaryFontColor;
+            btnload.Font = new Font(FontName, TextFontSize, FontStyle.Regular);
+            btnrevert.BackColor = AccentColor;
+            btnrevert.ForeColor = PrimaryFontColor;
+            btnrevert.Font = new Font(FontName, TextFontSize, FontStyle.Regular);
+            lblDesc.ForeColor = SecundaryFontColor;
+            lblDesc.Font = new Font(FontName, SecundaryTextFontSize, FontStyle.Regular);
+            tabctrl.BackColor = BackgroundColor;
+            tabctrl.Font = new Font(FontName, SecundaryTextFontSize, FontStyle.Regular);
+            tabctrl.ForeColor = SecundaryFontColor;
         }
 
         private void SetUpForm()
@@ -56,6 +106,10 @@ namespace SmartTweaks_For_Windows_11.ui
             var tabDesktop = new TabPage("Desktop");
             var tabExplorer = new TabPage("Explorer");
             var tabControl = new TabPage("Control Panel");
+            tabTaskbar.BackColor = BackgroundColor;
+            tabDesktop.BackColor = BackgroundColor;
+            tabExplorer.BackColor = BackgroundColor;
+            tabControl.BackColor = BackgroundColor;
 
 
             foreach (var item in jsonArray)
@@ -271,6 +325,7 @@ namespace SmartTweaks_For_Windows_11.ui
             registryAgent.RunPs1File(ps1Path);
             SetUpForm();
             btnrevert.Enabled = true;
+            this.Show();
         }
 
         private void lblDesc_Click(object sender, EventArgs e)
@@ -324,6 +379,7 @@ namespace SmartTweaks_For_Windows_11.ui
                                         {
                                             if (opt.TryGetProperty("state", out var state))
                                             {
+                                                rowTemplate.RowchkboxCheck = true;
                                                 rowTemplate.SelectComboBoxItem(opt.GetProperty("state").GetString());
                                             }
                                         }
@@ -343,6 +399,11 @@ namespace SmartTweaks_For_Windows_11.ui
         private void btndeselect_Click(object sender, EventArgs e)
         {
             changeCheckBoxState(false);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
