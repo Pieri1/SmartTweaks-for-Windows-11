@@ -51,7 +51,6 @@
 ## 🔧 Requirements
 
 * Windows 11 (Build 22000 or later)
-* .NET 6.0 (runtime only)
 * PowerShell 5.1 or later (pre-installed on Windows 11)
 
 ---
