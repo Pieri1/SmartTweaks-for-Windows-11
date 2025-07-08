@@ -57,7 +57,7 @@
 
 ## 🔗 Download
 
-Precompiled portable versions are available under the [Releases](https://github.com/your-user/smarttweaks/releases) section.
+Precompiled portable versions are available under the [Releases](https://github.com/Pieri1/SmartTweaks-for-Windows-11/releases) section.
 
 ---
 
