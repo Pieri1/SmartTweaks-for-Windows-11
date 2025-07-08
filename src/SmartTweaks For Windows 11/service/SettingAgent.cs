@@ -92,6 +92,13 @@ namespace SmartTweaks_For_Windows_11.service
                 {
                     string selectedPath = openDialog.FileName;
 
+                    // Verifica se o arquivo termina com .ps1 (case-insensitive)
+                    if (!selectedPath.EndsWith(".ps1", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("O arquivo selecionado não é um script PowerShell (.ps1).", "Arquivo inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return null;
+                    }
+
                     MessageBox.Show("Arquivo selecionado:\n" + selectedPath, "Sucesso");
 
                     var scriptLines = File.ReadAllLines(selectedPath);

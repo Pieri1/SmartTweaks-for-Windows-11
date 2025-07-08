@@ -360,27 +360,29 @@ namespace SmartTweaks_For_Windows_11.ui
             var jsonBrute = jsonReader.GetJson(relativePath);
             var jsonArray = jsonBrute.RootElement.EnumerateArray();
             var scriptLines = settingAgent.ReadPs1File();
-            foreach (TabPage tabPage in tabctrl.TabPages)
-            {
-                foreach (Control control in tabPage.Controls)
+            if(scriptLines != null) {
+                foreach (TabPage tabPage in tabctrl.TabPages)
                 {
-                    if (control is RowTemplate rowTemplate)
+                    foreach (Control control in tabPage.Controls)
                     {
-                        var item = jsonReader.GetJsonItem(relativePath, rowTemplate.RowcmbboxTag);
-                        if (item.Value.TryGetProperty("opts", out var opts))
+                        if (control is RowTemplate rowTemplate)
                         {
-                            foreach (var opt in opts.EnumerateArray())
+                            var item = jsonReader.GetJsonItem(relativePath, rowTemplate.RowcmbboxTag);
+                            if (item.Value.TryGetProperty("opts", out var opts))
                             {
-                                if (opt.TryGetProperty("cmd", out var cmd))
+                                foreach (var opt in opts.EnumerateArray())
                                 {
-                                    foreach(var line in scriptLines)
+                                    if (opt.TryGetProperty("cmd", out var cmd))
                                     {
-                                        if (line.Contains(cmd.GetString()))
+                                        foreach (var line in scriptLines)
                                         {
-                                            if (opt.TryGetProperty("state", out var state))
+                                            if (line.Contains(cmd.GetString()))
                                             {
-                                                rowTemplate.RowchkboxCheck = true;
-                                                rowTemplate.SelectComboBoxItem(opt.GetProperty("state").GetString());
+                                                if (opt.TryGetProperty("state", out var state))
+                                                {
+                                                    rowTemplate.RowchkboxCheck = true;
+                                                    rowTemplate.SelectComboBoxItem(opt.GetProperty("state").GetString());
+                                                }
                                             }
                                         }
                                     }
