@@ -91,10 +91,9 @@ namespace SmartTweaks_For_Windows_11.ui
         {
             var jsonReader = new JsonReader();
             var registryAgent = new RegistryAgent();
-            // Maybe this path will be a problem when the application is installed on a different machine
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
-            var jsonBrute = jsonReader.GetJson(relativePath);
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string configPath = Path.Combine(exePath, "config.json");
+            var jsonBrute = jsonReader.GetJson(configPath);
             var jsonArray = jsonBrute.RootElement.EnumerateArray();
             var comboBoxItems = new List<string>();
             int yTaskOffset = 30;
@@ -245,10 +244,9 @@ namespace SmartTweaks_For_Windows_11.ui
 
         private string updateTempPs1()
         {
-            // Maybe this path will be a problem when the application is installed on a different machine
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
-            string ps1Path = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\Run.ps1");
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine(exePath, "config.json");
+            string ps1Path = Path.Combine(exePath, "Run.ps1");
             SettingAgent settingAgent = new SettingAgent();
             JsonReader jsonReader = new JsonReader();
             RegistryAgent registryAgent = new RegistryAgent();
@@ -288,10 +286,9 @@ namespace SmartTweaks_For_Windows_11.ui
 
         private void saveState()
         {
-            // Maybe this path will be a problem when the application is installed on a different machine
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
-            string Ps1Path = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\SaveState.ps1");
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine(exePath, "config.json");
+            string Ps1Path = Path.Combine(exePath, "SaveState.ps1");
             SettingAgent settingAgent = new SettingAgent();
             JsonReader jsonReader = new JsonReader();
             RegistryAgent registryAgent = new RegistryAgent();
@@ -313,10 +310,9 @@ namespace SmartTweaks_For_Windows_11.ui
 
         private void btnexecute_Click(object sender, EventArgs e)
         {
-            // Maybe this path will be a problem when the application is installed on a different machine
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string SaveStatePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\SaveState.ps1");
-            string BackUpPath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\BackUp.ps1");
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string SaveStatePath = Path.Combine(exePath, "SaveState.ps1");
+            string BackUpPath = Path.Combine(exePath, "Backup.ps1");
             SettingAgent settingAgent = new SettingAgent();
             RegistryAgent registryAgent = new RegistryAgent();
             settingAgent.BackupPs1File(SaveStatePath, BackUpPath);
@@ -342,8 +338,8 @@ namespace SmartTweaks_For_Windows_11.ui
 
         private void btnrevert_Click(object sender, EventArgs e)
         {
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string BackUpPath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\configs\BackUp.ps1");
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string BackUpPath = Path.Combine(exePath, "BackUp.ps1");
             RegistryAgent registryAgent = new RegistryAgent();
             registryAgent.RunPs1File(BackUpPath);
             SetUpForm();
@@ -352,11 +348,11 @@ namespace SmartTweaks_For_Windows_11.ui
 
         private void btnload_Click(object sender, EventArgs e)
         {
+            changeCheckBoxState(false);
             JsonReader jsonReader = new JsonReader();
             SettingAgent settingAgent = new SettingAgent();
-            // Maybe this path will be a problem when the application is installed on a different machine
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string relativePath = Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\config.json");
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine(exePath, "config.json");
             var jsonBrute = jsonReader.GetJson(relativePath);
             var jsonArray = jsonBrute.RootElement.EnumerateArray();
             var scriptLines = settingAgent.ReadPs1File();

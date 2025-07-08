@@ -38,7 +38,7 @@
 
 ## ❓ Usage
 
-1. Launch `SmartTweaks.exe`.
+1. Launch `SmartTweaks.exe` **WITHOUT ADMINISTRATOR PRIVILEGES**.
 2. Navigate through the available tabs (Desktop, Explorer, Taskbar, ControlPanel).
 3. Select your desired configuration options.
 4. Click **Run** to apply immediately.

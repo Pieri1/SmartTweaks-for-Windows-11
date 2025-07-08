@@ -14,13 +14,6 @@ namespace SmartTweaks_For_Windows_11.service
     {
         public string RegRead(string reg, string key)
         {
-            if (!IsCurrentUserValid())
-            {
-                Console.WriteLine("The current user is not valid.");
-                //Dar aviso e fechar app
-                return null;
-            }
-
             try
             {
                 using (RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(reg))
@@ -40,8 +33,8 @@ namespace SmartTweaks_For_Windows_11.service
 
         public string RegRead(string reg)
         {
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string relativePath = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\SmartTweaks For Windows 11\data\psfunc\Test-RegistryKeyExist.ps1"));
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine(exePath, "Test-RegistryKeyExist.ps1");
 
             string powershell64Path = Environment.ExpandEnvironmentVariables(
                 @"%SystemRoot%\SysNative\WindowsPowerShell\v1.0\powershell.exe"
@@ -77,15 +70,6 @@ namespace SmartTweaks_For_Windows_11.service
             }
 
             return null;
-        }
-
-        private bool IsCurrentUserValid()
-        {
-            //Só funciona para meu PC
-            string currentUser = Environment.UserName;
-            string expectedUser = "Pieri";
-
-            return string.Equals(currentUser, expectedUser, StringComparison.OrdinalIgnoreCase);
         }
 
         public void RunPs1File(string filePath)
